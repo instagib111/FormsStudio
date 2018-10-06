@@ -1,0 +1,49 @@
+body {padding: 0; margin: 0;}
+
+#defaultCanvas0 {
+    width: 1536px;
+    height: 751px;
+    position: absolute;
+    z-index: 0;
+}
+#menuTitle {
+    text-align: center;
+}
+.input{
+    background: #444;
+    color : #CCC;
+}
+.closeVolet{
+    font-size: 11pt;
+    position: relative;
+    top: -25px;
+    left: 85px;
+    padding: 10px;
+}
+.onOff{
+    transition-property: background-color;
+    transition-duration: 300ms;
+}.onOff:hover{
+    background: #4a4c56;
+    color: #c8cbce;
+    cursor: pointer;
+}
+#mainMenu {
+    position: absolute;
+    min-width: 350px;
+    height: 100%;
+    background: rgba(240,240,240, 0.5);
+    z-index: 1;
+    overflow-y: auto;
+}
+.retracted{
+    background: rgba(240, 240, 240, 0) !important;
+    left: -310px;
+}
+/**  Minimaliste CSS Class **/
+.p0{
+    padding:0;
+}
+.m0{
+    margin:0;
+}

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0>
+    <style> </style>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"> -->
+    <link href="sty.css" rel="stylesheet" type="text/css" >
+    <script src="../addons/jquery3.min.js" ></script>
+    <script src="../addons/jquery-ui.min.js" ></script>        
+    <script src="../p5.min.js"></script>
+    <script src="../addons/p5.dom.min.js"></script>
+    <script src="../addons/p5.sound.min.js"></script>
+    <script src="object.js"></script>
+    <script src="obj.js"></script>
+    <script src="sketch.js"></script>
+  </head>
+  <body>
+    <div id="mainMenu" class="" data-status="open">
+      <h1 id="menuTitle">Settings <span id="btn-slide" class="onOff closeVolet glyphicon glyphicon-chevron-left" onclick="moveMenu()"></span></h1>
+      <div class="col-xs-12 p0">
+        <span class="glyphicon glyphicon-fast-backward"></span>
+        <span class="onOff glyphicon glyphicon-step-forward" onclick="step()"></span>
+        <span id="btn_pausePlay" class="onOff glyphicon glyphicon-pause" onclick="stopPlay()" ></span>
+        <span class="glyphicon glyphicon-stop"></span>
+        <span class="glyphicon glyphicon-repeat"></span>
+        <span id="btn_fullscreen" class="onOff glyphicon glyphicon-fullscreen" onclick="fs()"></span>
+      </div>
+      <div class="col-xs-12 p0">
+        <h3>Dot</h3>
+        <div class="col-xs-12">
+          <label for="count">Count max</label><br>
+          <input id="count" class="input" type="number" step="1" value="1" onchange="inp_update(this.value)" />
+          <hr>
+          <label for="var">Var</label> = <span id="sp_var"></span><br>
+          <input id="var" class="input" type="range" step="0.01" value="2" min="-1" max="1" >
+        </div>
+      </div>
+    </div>
+  </body>
+  <script>
+
+    function inp_update(val){
+      console.log("val", val)
+      inp_count_max = val
+    }
+
+    function moveMenu(){  
+      var elm = $("#mainMenu")  
+      var btn = $("#btn-slide")
+      if(elm.data("status") === "open"){
+        btn.removeClass("glyphicon-chevron-left")
+        btn.addClass("glyphicon-chevron-right")
+        elm.animate({ "left": "-310px"}, 150)
+        elm.addClass("retracted")
+        elm.attr("data-status", "close")
+        elm.data("status", "close")
+      }
+      else if(elm.data("status") === "close"){
+        btn.removeClass("glyphicon-chevron-right")
+        btn.addClass("glyphicon-chevron-left")
+        elm.animate({ "left": "0"}, 150)
+        elm.removeClass("retracted")
+        elm.attr("data-status", "open")
+        elm.data("status", "open")
+      }
+    }
+    function fs(){
+      fullscreen()
+    }
+    function step(){
+      redraw()
+    }
+    let stoped = false
+    function stopPlay(){
+      var btn = $("#btn_pausePlay")
+      if (stoped){
+        stoped = false
+        loop()
+        btn.removeClass("glyphicon-play")
+        btn.addClass("glyphicon-pause")
+      } 
+      else{
+        stoped = true
+        noLoop()
+        btn.removeClass("glyphicon-pause")
+        btn.addClass("glyphicon-play")
+      } 
+    }
+    
+
+
+    //ready
+    $(document).ready(function (){
+      var slider = document.getElementById("var")
+      var output = document.getElementById("sp_var")
+      output.innerHTML = slider.value
+      slider.value = inp_var
+      slider.oninput = function() {
+          output.innerHTML = this.value
+          inp_var = this.value
+      } 
+    })
+  </script>
+</html>
