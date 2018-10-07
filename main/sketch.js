@@ -13,7 +13,7 @@ function setup() {
 
   //squ.push(new Square(0,0, 50, 0))
   squ.push(new MultiDot(innerWidth / 2, innerHeight / 2, 0))
-  //squ.push(new MultiDot(innerWidth / 2, innerHeight / 2, 0))
+  squ.push(new MultiDot(innerWidth / 1.5, innerHeight / 1.5, 0))
 }
 
 function mousePressed(){

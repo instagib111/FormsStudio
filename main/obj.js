@@ -82,12 +82,12 @@ let DotFadeOut = function (v, a){
     this.draw = function (){
         strokeWeight(10)
         //stroke(0,0,0, this.a)
-        stroke( map(v.x - v.y, 0, 1000, 0, 255),
-            map(v.y - v.x, 0, 1000, 0, 255),
-            map(this.a + v.y, 0, 1000, 0, 255),
+        stroke( map(v.x - v.y, 0, 2000, 0, 255),
+            map(v.y - v.x, 0, 2000, 0, 255),
+            map(this.a + v.y, 0, 2000, 0, 255),
             this.a)
 
-        stroke(0,0,0, this.a)
+        // stroke(0,0,0, this.a)
 
         vertex(v.x, v.y)
     }
