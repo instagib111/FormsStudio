@@ -21,8 +21,9 @@ let MultiDot = function (x, y, rad){
     let ranrm = ran + 2
 
     let tb = false
-    this.update = function (value){
-        
+    let value = 0
+    this.update = function (){
+        value = controls.multiDot.value
         this.speed += Math.sin(value)
         this.rad += 0.05 * this.speed / value
 

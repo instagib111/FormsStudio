@@ -2,9 +2,6 @@
 var spir = [];
 var squ = [];
 
-let inp_var = 2;
-let inp_count_max = 1;
-
 function setup() {
   createCanvas(windowWidth, windowHeight)
 
@@ -23,11 +20,11 @@ function draw() {
 
   // accepte tous les objets ayant les bool this.add et this.rm
   for(let i = 0; i < squ.length; i++){
-    squ[i].update(inp_var+i)
+    squ[i].update()
     if (squ[i].add){ 
         squ.push(new MultiDot(innerWidth / 2, innerHeight / 2, 0))
     }
-    if (squ[i].rm || squ.length > 1)
+    if (squ[i].rm || squ.length > controls.global.max_inst)
       squ.splice(i,1)
   }
 

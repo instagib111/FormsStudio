@@ -11,6 +11,7 @@
     <script src="../p5.min.js"></script>
     <script src="../addons/p5.dom.min.js"></script>
     <script src="../addons/p5.sound.min.js"></script>
+    <script src="control.js"></script>
     <script src="object.js"></script>
     <script src="obj.js"></script>
     <script src="sketch.js"></script>
@@ -30,7 +31,7 @@
         <h3>Dot</h3>
         <div class="col-xs-12">
           <label for="count">Count max</label><br>
-          <input id="count" class="input" type="number" step="1" value="1" onchange="inp_update(this.value)" />
+          <input id="count" class="input" type="number" step="1" value="1" />
           <hr>
           <label for="var">Var</label> = <span id="sp_var"></span><br>
           <input id="var" class="input" type="range" step="0.001" value="2" min="0" max="1" >
@@ -40,9 +41,6 @@
   </body>
   <script>
 
-    function inp_update(val){
-      inp_count_max = val
-    }
 
     function moveMenu(){  
       var elm = $("#mainMenu")  
@@ -91,14 +89,20 @@
 
     //ready
     $(document).ready(function (){
-      var slider = document.getElementById("var")
-      var output = document.getElementById("sp_var")
-      output.innerHTML = slider.value
-      slider.value = inp_var
-      slider.oninput = function() {
-          output.innerHTML = this.value
-          inp_var = this.value
-      } 
+        var slider = document.getElementById("var")
+        var output = document.getElementById("sp_var")
+
+        $("#count").on("change", function () {
+          controls.global.max_inst = this.value;
+        })
+
+        output.innerHTML = slider.value
+        slider.oninput = function() {
+            output.innerHTML = this.value
+            controls.multiDot.value = this.value
+        } 
+
+
     })
   </script>
 </html>
