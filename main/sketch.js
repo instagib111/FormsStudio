@@ -7,13 +7,10 @@ let inp_count_max = 1;
 
 function setup() {
   createCanvas(windowWidth, windowHeight)
-  // for(var i = 0; i<2; i++){
-  //   spir.push(new Spirale(random(0, windowWidth), random(0, windowHeight)))
-  // }
 
   //squ.push(new Square(0,0, 50, 0))
   squ.push(new MultiDot(innerWidth / 2, innerHeight / 2, 0))
-  squ.push(new MultiDot(innerWidth / 1.5, innerHeight / 1.5, 0))
+  //squ.push(new MultiDot(innerWidth / 1.5, innerHeight / 1.5, 0))
 }
 
 function mousePressed(){
@@ -30,10 +27,8 @@ function draw() {
     if (squ[i].add){ 
         squ.push(new MultiDot(innerWidth / 2, innerHeight / 2, 0))
     }
-    if (squ[i].rm)
+    if (squ[i].rm || squ.length > 1)
       squ.splice(i,1)
-      
-
   }
 
   for(let i = 0; i < spir.length; i++)

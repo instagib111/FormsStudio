@@ -10,27 +10,28 @@ let MultiDot = function (x, y, rad){
     this.rm = false
 
     this.points = []
-    let traine = []
-    for(let i = 0; i < 8; i++){
+    let trainee = []
+    for(let i = 0; i < 16; i++){
         this.points.push({x:0, y:0})
-        traine.push([])
+        trainee.push([])
     }
 
     
     let ran = dist(0, 0, innerWidth / 2, innerHeight / 2)
-    let ranrm = ran 
+    let ranrm = ran + 2
 
     let tb = false
-
     this.update = function (value){
-        this.speed += Math.cos(value) 
-        this.rad += 0.05 * this.speed * value
+        
+        this.speed += Math.sin(value)
+        this.rad += 0.05 * this.speed / value
+
         text("speed " + this.speed, innerWidth - 100, 30)
         text("rad " + this.rad, innerWidth - 100, 60)
 
         for (let i = 0; i < this.points.length; i++){
-            this.points[i].x = this.x + Math.cos(this.speed + (i*(PI/4))) * this.rad
-            this.points[i].y = this.y + Math.sin(this.speed + (i*(PI/4))) * this.rad
+            this.points[i].x = this.x + Math.cos(this.speed + (i*(PI/8))) * this.rad
+            this.points[i].y = this.y + Math.sin(this.speed + (i*(PI/8))) * this.rad
         }
         if(this.add){
             this.add = false
@@ -46,22 +47,17 @@ let MultiDot = function (x, y, rad){
     }
     this.draw = function (){
 
-        strokeWeight(1)
-        stroke(0,0,0)
-        // 4 point
-        for (let i = 0; i < this.points.length; i++){
-            //point(this.points[i].x, this.points[i].y)
-            
-            traine[i].push(new DotFadeOut(createVector(this.points[i].x, this.points[i].y), 200))
-        }
-        for(let i = 0; i < traine.length; i++){
+        for(let i = 0; i < trainee.length; i++){
             beginShape(LINES)
-            for (let y = 0; y < traine[i].length; y++){
-                traine[i][y].update()
-                if(traine[i][y].rm)
-                    traine[i].splice(y, 1)
+            for (let y = 1; y < trainee[i].length; y++){
+                trainee[i][y].update()
+                if(trainee[i][y].rm)
+                trainee[i].splice(y, 1)
             }
             endShape(CLOSE)
+        }
+        for (let i = 0; i < this.points.length; i++){
+            trainee[i].push(new DotFadeOut(createVector(this.points[i].x, this.points[i].y), 200))
         }
     }
 }
@@ -69,12 +65,12 @@ let MultiDot = function (x, y, rad){
 let DotFadeOut = function (v, a){
     this.a = a
     this.rm = false
-    let ran = random(-1, 1)
+    //let ran = random(-1, 1)
     this.update = function (){
-        this.a -= 10
-        ran = random(-1, 1)
-        v.x += ran
-        v.y += ran
+        this.a -= 5
+        // ran = random(-1, 1)
+        // v.x += ran
+        // v.y += ran
         if(this.a < 1)
             this.rm = true
         this.draw()
