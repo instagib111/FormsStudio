@@ -23,6 +23,7 @@ body {padding: 0; margin: 0;}
 .onOff{
     transition-property: background-color;
     transition-duration: 300ms;
+    font-size: initial;
 }.onOff:hover{
     background: #4a4c56;
     color: #c8cbce;
@@ -30,7 +31,7 @@ body {padding: 0; margin: 0;}
 }
 #mainMenu {
     position: absolute;
-    min-width: 350px;
+    max-width: 350px;
     height: 100%;
     background: rgba(240,240,240, 0.5);
     z-index: 1;
@@ -38,7 +39,7 @@ body {padding: 0; margin: 0;}
 }
 .retracted{
     background: rgba(240, 240, 240, 0) !important;
-    left: -310px;
+    left: -350px;
 }
 /**  Minimaliste CSS Class **/
 .p0{

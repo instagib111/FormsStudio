@@ -18,17 +18,17 @@ let MultiDot = function (x, y, rad){
 
     
     let ran = dist(0, 0, innerWidth / 2, innerHeight / 2)
-    let ranrm = ran + 2
+    let ranrm = ran + 200
 
     let tb = false
     let value = 0
     this.update = function (){
         value = controls.multiDot.value
-        this.speed += Math.sin(value)
+        this.speed += Math.sin(value) * controls.global.time
         this.rad += 0.05 * this.speed / value
 
-        text("speed " + this.speed, innerWidth - 100, 30)
-        text("rad " + this.rad, innerWidth - 100, 60)
+        controls.displayText.push("speed " + this.speed)
+        controls.displayText.push("rad " + this.rad)
 
         for (let i = 0; i < this.points.length; i++){
             this.points[i].x = this.x + Math.cos(this.speed + (i*(PI/8))) * this.rad
@@ -55,7 +55,7 @@ let MultiDot = function (x, y, rad){
                 if(trainee[i][y].rm)
                 trainee[i].splice(y, 1)
             }
-            endShape(CLOSE)
+            endShape()
         }
         for (let i = 0; i < this.points.length; i++){
             trainee[i].push(new DotFadeOut(createVector(this.points[i].x, this.points[i].y), 200))
@@ -79,10 +79,12 @@ let DotFadeOut = function (v, a){
     this.draw = function (){
         strokeWeight(10)
         //stroke(0,0,0, this.a)
-        stroke( map(v.x - v.y, 0, 2000, 0, 255),
-            map(v.y - v.x, 0, 2000, 0, 255),
-            map(this.a + v.y, 0, 2000, 0, 255),
-            this.a)
+        // stroke( map(v.x - v.y, 0, 2000, 0, 255),
+        //     map(v.y - v.x, 0, 2000, 0, 255),
+        //     map(this.a + v.y, 0, 2000, 0, 255),
+        //     this.a)
+
+        stroke(Math.sin(this.a), 150, 50 + this.a, this.a)
 
         // stroke(0,0,0, this.a)
 
