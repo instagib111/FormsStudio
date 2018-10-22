@@ -24,7 +24,7 @@ let MultiDot = function (x, y, rad){
     let value = 0
     this.update = function (){
         value = controls.multiDot.value
-        this.speed += Math.sin(value) * controls.global.time
+        this.speed += Math.sin(value) * controls.multiDot.time
         this.rad += 0.05 * this.speed / value
 
         controls.displayText.push("speed " + this.speed)
