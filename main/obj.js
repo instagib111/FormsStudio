@@ -84,7 +84,7 @@ let DotFadeOut = function (v, a){
         //     map(this.a + v.y, 0, 2000, 0, 255),
         //     this.a)
 
-        stroke(Math.sin(this.a), 150, 50 + this.a, this.a)
+        stroke(Math.sin(this.a), 200, 50 + this.a, this.a)
 
         // stroke(0,0,0, this.a)
 
@@ -106,9 +106,8 @@ let Square = function (x, y, w, r) {
         //this.x += 
 
         this.x += 0.1
-        this.r += 0.01
 
-        if(!this.add && this.x > this.w * 2)
+        if(!this.add && this.x > x * 2)
             this.add = true
 
         if(this.x > windowWidth)
@@ -121,8 +120,7 @@ let Square = function (x, y, w, r) {
         
         noStroke()
         fill(map(this.x, 0, innerWidth, 0, 255), map(this.y, 0, innerHeight, 0, 255), map(this.w, 0, maxW, 0, 255))
-        translate(width / 2, height / 2);
-        rotate(PI * this.r)
+        
         rect(this.x, this.y, this.w, this.w)
     }
 

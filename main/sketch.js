@@ -1,12 +1,12 @@
 function setup() {
   createCanvas(windowWidth, windowHeight)
 
-  colorMode(HSB, 255)
-  controls.multiDot.setup()
+  controls.drawable = controls.multiDot
+  controls.drawable.setup()
 }
 
 function resetAll(){
-  controls.multiDot.setup();
+  controls.drawable.setup();
 }
 
 function displayAllText(){
@@ -22,7 +22,7 @@ function displayAllText(){
 function draw() {
   background(200)
 
-  controls.multiDot.draw()
+  controls.drawable.draw()
   
   displayAllText()
 }

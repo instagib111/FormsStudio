@@ -31,6 +31,10 @@
         <h3>Dot</h3>
         <div class="col-xs-12">
           <div class="col-xs-12">
+            <label for="sel_drawList">Draw list :</label>
+            <select id="sel_drawList" class="input" onchange="loadForm(this.value)"></select>
+          </div>
+          <div class="col-xs-12">
             <label for="count" class="col-xs-12">Count max</label><br>
             <input id="count" class="input col-xs-12" type="number" step="1" value="1" />
           </div>
@@ -94,7 +98,22 @@
       } 
     }
     
-    
+    function pplDrawList(){
+
+      for (var i in controls){
+        for(var o in controls[i]){
+          // add new option
+          if(o == "draw")
+            $('#sel_drawList').append('<option value="'+i+'" >'+i+'</option>');
+        }
+      }
+    }
+
+    function loadForm(display){
+      controls.drawable = controls[display]
+      controls.drawable.setup()
+    }
+
     //ready
     $(document).ready(function (){
       var slider = document.getElementById("var")
@@ -117,6 +136,7 @@
       } 
       
       setTimeout(function(){stopPlay()}, 150)
+      pplDrawList()
 
     })
   </script>

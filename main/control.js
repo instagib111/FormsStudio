@@ -7,6 +7,9 @@ let controls = {
         max_inst : 1,
         fullscreen : false
     },
+    drawable : {
+
+    },
     multiDot : {
         value : 2,
         time : 1,
@@ -27,8 +30,28 @@ let controls = {
         setup : 
             function (){
                 this.arr = []
-
+                colorMode(HSB, 255)
                 this.arr.push(new MultiDot(innerWidth / 2, innerHeight / 2, 0))
+            }
+    },
+    square : {
+        arr : [],
+        draw : 
+            function (){
+                for(let i = 0; i < this.arr.length; i++){
+                    this.arr[i].update()
+                    if (this.arr[i].add)
+                        this.arr.push(new Square(2, innerHeight / 2, 10, 20))
+                    
+                    if (this.arr[i].rm)// || this.arr.length > controls.global.max_inst)
+                        this.arr.splice(i,1)
+                }
+            },
+        setup : 
+            function (){
+                this.arr = [];
+                colorMode(RGB, 255)
+                this.arr.push(new Square(innerWidth / 2, innerHeight / 2, 10, 20))
             }
     },
     displayText : []
