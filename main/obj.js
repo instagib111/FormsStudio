@@ -102,10 +102,13 @@ let Square = function (x, y, w, r) {
 
     let maxW = 200
 
+    let ctrl = controls.drawable.input
+
     this.update = function () {
         //this.x += 
 
-        this.x += 0.1
+        this.x += ctrl.speed.value
+        controls.displayText.push("speed " + ctrl.speed.value)
 
         if(!this.add && this.x > x * 2)
             this.add = true
