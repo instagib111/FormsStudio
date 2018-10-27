@@ -110,10 +110,10 @@ let Square = function (x, y, w, r) {
         this.x += ctrl.speed.value
         controls.displayText.push("speed " + ctrl.speed.value)
 
-        if(!this.add && this.x > x * 2)
+        if(!this.add && this.x > innerWidth)
             this.add = true
 
-        if(this.x > windowWidth)
+        if(this.x > innerWidth +  10)
             this.rm = true
 
         this.draw()
@@ -122,7 +122,7 @@ let Square = function (x, y, w, r) {
     this.draw = function () {
         
         noStroke()
-        fill(map(this.x, 0, innerWidth, 0, 255), map(this.y, 0, innerHeight, 0, 255), map(this.w, 0, maxW, 0, 255))
+        fill(0)
         
         rect(this.x, this.y, this.w, this.w)
     }

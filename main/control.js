@@ -59,7 +59,7 @@ let controls = {
                 min: 0.01,
                 max: 1,
                 class: "input",
-                onchange: "updateValue(this)"
+                onchange: "updateValue(this.value, 'speed')"
             }
         },
         arr: [],
