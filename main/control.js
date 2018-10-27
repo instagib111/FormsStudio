@@ -18,7 +18,8 @@ let controls = {
                 value: 0.5,
                 min: 0.01,
                 max: 1,
-                class: "input"
+                class: "input",
+                onchange: "updateValue(this.value, 'value')"
             },
             time: {
                 type: "range",
@@ -26,11 +27,10 @@ let controls = {
                 value: 0.5,
                 min: 0.01,
                 max: 1,
-                class: "input"
+                class: "input",
+                onchange: "updateValue(this.value, 'time')"
             }
         },
-        value: 2, // en attendant
-        time: 1, // en attentdant
         arr: [],
         draw: function () {
             for (let i = 0; i < this.arr.length; i++) {
