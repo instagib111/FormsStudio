@@ -12,7 +12,7 @@ function resetAll(){
 function displayAllText(){
   var margin_top = 30
   noStroke()
-
+  fill(150)
   for(let i = 0; i < controls.displayText.length; i++){
     text(controls.displayText[i],  innerWidth - 100, i * 20 + margin_top)
   }

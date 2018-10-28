@@ -133,11 +133,13 @@
     elm.append("<h2>" + title + "</h2>")
     for (var it in input) {
       elm.append("<label for='inp_" + it + "'>" + it + "</label>")
+      elm.append(" <span id='sp_"+ it +"'>" + input[it].value + "</span>")
       $("<input>").attr(input[it]).appendTo(elm)
     }
   }
 
   function updateValue(val, to){
+    $('#sp_'+to).html(val) 
     controls.drawable.input[to].value = parseFloat(val)
   }
 
@@ -165,8 +167,8 @@
     // }
 
     setTimeout(function () {
-      stopPlay()
-      loadForm("multiDot")
+      //stopPlay()
+      loadForm("wave")
     }, 150)
 
     pplDrawList()

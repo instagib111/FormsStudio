@@ -1,5 +1,62 @@
+let Wave = function () {
+    let arrEli = []
+    this.add = false
+    this.rm = false
 
-let MultiDot = function (x, y, rad){
+    this.direction = 1
+    this.speed = 1
+
+    let max = innerWidth * 2
+    for (let i = 0; i < max; i++) {
+        let color = map(i, 0, max, 0, 255)
+        arrEli.push({
+            x: innerWidth / 2,
+            y: innerHeight / 2,
+            r: i,
+            c: color,
+            up : true
+        })
+    }
+
+    let ctrl = controls.drawable.input
+    this.update = function () {
+        //this.speed += map(ctrl.speed.value, 0, ctrl.speed.max, 0, 255)
+        controls.displayText.push("speed " + this.speed * this.direction)
+
+
+        for (let i = 0; i < max; i++) {
+            arrEli[i].c += i * ctrl.speed.value
+            if (arrEli[i].c >= 255 && arrEli[i].up){
+                arrEli[i].up = !arrEli[i].up
+                arrEli[i].c = map(arrEli[i].c, 0, 255, 255, 0)
+            }
+            
+            if (arrEli[i].c <= 0 && !arrEli[i].up){
+                arrEli[i].up = !arrEli[i].up
+            }
+
+            //arrEli[i].c += this.speed * this.direction
+
+            // if (this.speed >= ctrl.speed.max && this.direction === 1)
+            //     this.direction = -1
+            // if (this.speed <= 0 && this.direction === -1)
+            //     this.direction = 1
+        }
+
+        this.draw()
+    }
+    this.draw = function () {
+        strokeWeight(1)
+        noFill()
+        for (let i = 0; i < max; i++) {
+            stroke(arrEli[i].c, ctrl.saturation.value, ctrl.bright.value)
+            ellipse(arrEli[i].x, arrEli[i].y, arrEli[i].r)
+        }
+    }
+}
+
+
+let MultiDot = function (x, y, rad) {
     this.x = x
     this.y = y
     this.rad = rad
@@ -11,19 +68,22 @@ let MultiDot = function (x, y, rad){
 
     this.points = []
     let trainee = []
-    for(let i = 0; i < 16; i++){
-        this.points.push({x:0, y:0})
+    for (let i = 0; i < 16; i++) {
+        this.points.push({
+            x: 0,
+            y: 0
+        })
         trainee.push([])
     }
 
-    
+
     let ran = dist(0, 0, innerWidth / 2, innerHeight / 2)
     let ranrm = ran + 200
 
     let tb = false
     let value = 0
     let ctrl = controls.drawable.input
-    this.update = function (){
+    this.update = function () {
         value = ctrl.value.value
         this.speed += Math.sin(value) * ctrl.time.value
         this.rad += 0.05 * this.speed / value
@@ -31,53 +91,52 @@ let MultiDot = function (x, y, rad){
         controls.displayText.push("speed " + this.speed)
         controls.displayText.push("rad " + this.rad)
 
-        for (let i = 0; i < this.points.length; i++){
-            this.points[i].x = this.x + Math.cos(this.speed + (i*(PI/8))) * this.rad
-            this.points[i].y = this.y + Math.sin(this.speed + (i*(PI/8))) * this.rad
+        for (let i = 0; i < this.points.length; i++) {
+            this.points[i].x = this.x + Math.cos(this.speed + (i * (PI / 8))) * this.rad
+            this.points[i].y = this.y + Math.sin(this.speed + (i * (PI / 8))) * this.rad
         }
-        if(this.add){
+        if (this.add) {
             this.add = false
             tb = true
-        }
-        else if((!tb) && Math.abs(this.rad) > ran)
+        } else if ((!tb) && Math.abs(this.rad) > ran)
             this.add = true
 
-        if(this.rad > ranrm || (this.x < 0 || this.x > innerWidth) || (this.y < 0 || this.y > innerHeight) )
+        if (this.rad > ranrm || (this.x < 0 || this.x > innerWidth) || (this.y < 0 || this.y > innerHeight))
             this.rm = true
 
         this.draw()
     }
-    this.draw = function (){
+    this.draw = function () {
 
-        for(let i = 0; i < trainee.length; i++){
+        for (let i = 0; i < trainee.length; i++) {
             beginShape(LINES)
-            for (let y = 1; y < trainee[i].length; y++){
+            for (let y = 1; y < trainee[i].length; y++) {
                 trainee[i][y].update()
-                if(trainee[i][y].rm)
-                trainee[i].splice(y, 1)
+                if (trainee[i][y].rm)
+                    trainee[i].splice(y, 1)
             }
             endShape()
         }
-        for (let i = 0; i < this.points.length; i++){
+        for (let i = 0; i < this.points.length; i++) {
             trainee[i].push(new DotFadeOut(createVector(this.points[i].x, this.points[i].y), 200))
         }
     }
 }
 
-let DotFadeOut = function (v, a){
+let DotFadeOut = function (v, a) {
     this.a = a
     this.rm = false
     //let ran = random(-1, 1)
-    this.update = function (){
+    this.update = function () {
         this.a -= 5
         // ran = random(-1, 1)
         // v.x += ran
         // v.y += ran
-        if(this.a < 1)
+        if (this.a < 1)
             this.rm = true
         this.draw()
     }
-    this.draw = function (){
+    this.draw = function () {
         strokeWeight(10)
         //stroke(0,0,0, this.a)
         // stroke( map(v.x - v.y, 0, 2000, 0, 255),
@@ -111,20 +170,20 @@ let Square = function (x, y, w, r) {
         this.x += ctrl.speed.value
         controls.displayText.push("speed " + ctrl.speed.value)
 
-        if(!this.add && this.x > innerWidth)
+        if (!this.add && this.x > innerWidth)
             this.add = true
 
-        if(this.x > innerWidth +  10)
+        if (this.x > innerWidth + 10)
             this.rm = true
 
         this.draw()
     }
 
     this.draw = function () {
-        
+
         noStroke()
         fill(0)
-        
+
         rect(this.x, this.y, this.w, this.w)
     }
 

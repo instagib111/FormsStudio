@@ -7,8 +7,56 @@ let controls = {
         max_inst: 1,
         fullscreen: false
     },
-    drawable: {
+    drawable: {},
+    wave : {
+        input: {
+            speed: {
+                type: "range",
+                step: 0.001,
+                value: 0.01,
+                min: 0.001,
+                max: 1,
+                class: "input",
+                oninput: "updateValue(this.value, 'speed')"
+            },
+            saturation: {
+                type: "range",
+                step: 1,
+                value: 100,
+                min: 1,
+                max: 255,
+                class: "input",
+                oninput: "updateValue(this.value, 'saturation')"
+            },
+            bright: {
+                type: "range",
+                step: 1,
+                value: 100,
+                min: 1,
+                max: 255,
+                class: "input",
+                oninput: "updateValue(this.value, 'bright')"
+            }
+        },
+        arr : [],
+        draw: function () {
+            for (let i = 0; i < this.arr.length; i++) {
+                this.arr[i].update()
+                if (this.arr[i].add)
+                    this.arr.push(new Wave())
 
+                if (this.arr[i].rm) // || this.arr.length > controls.global.max_inst)
+                    this.arr.splice(i, 1)
+            }
+
+            text("nombre d'instances : " + this.arr.length, innerWidth - 400, 30)
+        },
+        setup: function () {
+            this.arr = []
+            colorMode(HSB, 255)
+
+            this.arr.push(new Wave())
+        }
     },
     multiDot: {
         input: {
@@ -19,7 +67,7 @@ let controls = {
                 min: 0.01,
                 max: 1,
                 class: "input",
-                onchange: "updateValue(this.value, 'value')"
+                oninput: "updateValue(this.value, 'value')"
             },
             time: {
                 type: "range",
@@ -28,7 +76,7 @@ let controls = {
                 min: 0.01,
                 max: 1,
                 class: "input",
-                onchange: "updateValue(this.value, 'time')"
+                oninput: "updateValue(this.value, 'time')"
             }
         },
         arr: [],
@@ -59,7 +107,7 @@ let controls = {
                 min: 0.01,
                 max: 1,
                 class: "input",
-                onchange: "updateValue(this.value, 'speed')"
+                oninput: "updateValue(this.value, 'speed')"
             }
         },
         arr: [],
