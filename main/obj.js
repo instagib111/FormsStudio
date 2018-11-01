@@ -5,7 +5,6 @@ let Wave = function () {
 
     this.direction = 1
     this.speed = 1
-
     let max = innerWidth * 2
     for (let i = 0; i < max; i++) {
         let color = map(i, 0, max, 0, 255)
@@ -13,36 +12,17 @@ let Wave = function () {
             x: innerWidth / 2,
             y: innerHeight / 2,
             r: i,
-            c: color,
-            up : true
+            c: color
         })
     }
 
     let ctrl = controls.drawable.input
     this.update = function () {
-        //this.speed += map(ctrl.speed.value, 0, ctrl.speed.max, 0, 255)
-        controls.displayText.push("speed " + this.speed * this.direction)
-
-
+        this.speed += ctrl.speed.value
         for (let i = 0; i < max; i++) {
-            arrEli[i].c += i * ctrl.speed.value
-            if (arrEli[i].c >= 255 && arrEli[i].up){
-                arrEli[i].up = !arrEli[i].up
-                arrEli[i].c = map(arrEli[i].c, 0, 255, 255, 0)
-            }
-            
-            if (arrEli[i].c <= 0 && !arrEli[i].up){
-                arrEli[i].up = !arrEli[i].up
-            }
-
-            //arrEli[i].c += this.speed * this.direction
-
-            // if (this.speed >= ctrl.speed.max && this.direction === 1)
-            //     this.direction = -1
-            // if (this.speed <= 0 && this.direction === -1)
-            //     this.direction = 1
+            arrEli[i].c = Math.abs( Math.cos(this.speed + (i * PI/(ctrl.space.value + i / ctrl.space.value ))) * (ctrl.rad.value) )
         }
-
+        
         this.draw()
     }
     this.draw = function () {
@@ -50,7 +30,8 @@ let Wave = function () {
         noFill()
         for (let i = 0; i < max; i++) {
             stroke(arrEli[i].c, ctrl.saturation.value, ctrl.bright.value)
-            ellipse(arrEli[i].x, arrEli[i].y, arrEli[i].r)
+            // ellipse(arrEli[i].x, arrEli[i].y, arrEli[i].r)
+            ellipse(innerWidth / 2, innerHeight / 2, arrEli[i].r)
         }
     }
 }

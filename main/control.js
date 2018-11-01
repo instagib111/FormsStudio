@@ -13,16 +13,34 @@ let controls = {
             speed: {
                 type: "range",
                 step: 0.001,
-                value: 0.01,
+                value: 3.213,
                 min: 0.001,
-                max: 1,
+                max: 10,
                 class: "input",
                 oninput: "updateValue(this.value, 'speed')"
+            },
+            space: {
+                type: "range",
+                step: 1,
+                value: 14,
+                min: 4,
+                max: 1000,
+                class: "input",
+                oninput: "updateValue(this.value, 'space')"
+            },
+            rad: {
+                type: "range",
+                step: 10,
+                value: 184,
+                min: 4,
+                max: 300,
+                class: "input",
+                oninput: "updateValue(this.value, 'rad')"
             },
             saturation: {
                 type: "range",
                 step: 1,
-                value: 100,
+                value: 158,
                 min: 1,
                 max: 255,
                 class: "input",
@@ -31,7 +49,7 @@ let controls = {
             bright: {
                 type: "range",
                 step: 1,
-                value: 100,
+                value: 170,
                 min: 1,
                 max: 255,
                 class: "input",
@@ -53,7 +71,7 @@ let controls = {
         },
         setup: function () {
             this.arr = []
-            colorMode(HSB, 255)
+            colorMode(RGB, 255)
 
             this.arr.push(new Wave())
         }
