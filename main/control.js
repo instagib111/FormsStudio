@@ -31,10 +31,10 @@ let controls = {
             },
             size: {
                 type: "range",
-                step: 1,
-                value: 10,
-                min: 1,
-                max: 100,
+                step: 0.01,
+                value: 1,
+                min: 0,
+                max: 10,
                 class: "input",
                 oninput: "updateValue(this.value, 'size')"
             }
@@ -116,12 +116,11 @@ let controls = {
         },
         arr : [],
         draw: function () {
-            if(controls.drawable.input.colorMode.toggle[0] == "RGB"){
+            if(controls.drawable.input.colorMode.toggle[0] == "RGB")
                 colorMode(RGB, 255)
-            }
-            else if (controls.drawable.input.colorMode.toggle[0] == "HSB"){
+            else if (controls.drawable.input.colorMode.toggle[0] == "HSB")
                 colorMode(HSB, 255)
-            }
+
             for (let i = 0; i < this.arr.length; i++) {
                 this.arr[i].update()
                 if (this.arr[i].add)
@@ -135,7 +134,6 @@ let controls = {
         },
         setup: function () {
             this.arr = []
-            console.log(this.parentElement)
             if(controls.drawable.input.colorMode.toggle[0] == "RBG")
                 colorMode(RGB, 255)
             else 
@@ -147,11 +145,13 @@ let controls = {
     },
     wave : {
         input: {
-            modeHSB : {
+            colorMode : {
                 type: "checkbox",
-                checked: "checked",
+                id: "inp_colorMode",
+                toggle: ["RGB", "HSB"],
+                value: "RGB",
                 class: "input",
-                oninput: "updateValue(this.value, 'modeHSB')"
+                oninput: "updateCbx(this.toggle, 'colorMode')"
             },
             speed: {
                 type: "range",
@@ -201,6 +201,11 @@ let controls = {
         },
         arr : [],
         draw: function () {
+            if(controls.drawable.input.colorMode.toggle[0] == "RGB")
+                colorMode(RGB, 255)
+            else if (controls.drawable.input.colorMode.toggle[0] == "HSB")
+                colorMode(HSB, 255)
+                
             for (let i = 0; i < this.arr.length; i++) {
                 this.arr[i].update()
                 if (this.arr[i].add)
@@ -214,7 +219,10 @@ let controls = {
         },
         setup: function () {
             this.arr = []
-            colorMode(HSB, 255)
+            if(controls.drawable.input.colorMode.toggle[0] == "RBG")
+                colorMode(RGB, 255)
+            else 
+                colorMode(HSB, 255)
 
             this.arr.push(new Wave())
         }
