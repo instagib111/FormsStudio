@@ -1,3 +1,42 @@
+let SquareWave = function () {
+    let arrEli = []
+    this.add = false
+    this.rm = false
+
+    this.direction = 1
+    this.speed = 1
+    let max = innerWidth * 2
+    for (let i = 0; i < max; i++) {
+        let color = map(i, 0, max, 0, 255)
+        arrEli.push({
+            x: innerWidth / 2,
+            y: innerHeight / 2,
+            r: i,
+            c: color
+        })
+    }
+
+    let ctrl = controls.drawable.input
+    this.update = function () {
+        this.speed += ctrl.speed.value
+        for (let i = 0; i < max; i++) {
+            arrEli[i].c = Math.abs( Math.cos(this.speed + (i * PI/(ctrl.space.value + i / ctrl.space.value ))) * (ctrl.rad.value) )
+        }
+        
+        this.draw()
+    }
+    this.draw = function () {
+        strokeWeight(1)
+        noFill()
+        for (let i = 0; i < max; i++) {
+            stroke(arrEli[i].c, ctrl.saturation.value, ctrl.bright.value)
+            // ellipse(arrEli[i].x, arrEli[i].y, arrEli[i].r)
+            rect(innerWidth / 2, innerHeight / 2, arrEli[i].r, arrEli[i].r)
+        }
+    }
+}
+
+
 let Wave = function () {
     let arrEli = []
     this.add = false

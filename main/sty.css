@@ -9,6 +9,10 @@ body {padding: 0; margin: 0;}
 #menuTitle {
     text-align: center;
 }
+.separ {
+    border: 0;
+    margin-top: -10px;
+}
 .input{
     background: #444;
     color : #CCC;
