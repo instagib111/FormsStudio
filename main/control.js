@@ -156,7 +156,7 @@ let controls = {
             speed: {
                 type: "range",
                 step: 0.001,
-                value: 3.213,
+                value: 0.067,
                 min: 0.001,
                 max: 10,
                 class: "input",
@@ -164,21 +164,30 @@ let controls = {
             },
             space: {
                 type: "range",
-                step: 1,
-                value: 14,
-                min: 4,
-                max: 1000,
+                step: 0.1,
+                value: 6.3,
+                min: 0,
+                max: 100,
                 class: "input",
                 oninput: "updateValue(this.value, 'space')"
             },
             rad: {
                 type: "range",
                 step: 10,
-                value: 184,
+                value: 254,
                 min: 4,
                 max: 300,
                 class: "input",
                 oninput: "updateValue(this.value, 'rad')"
+            },
+            tribe: {
+                type: "range",
+                step: 0.1,
+                value: 22.4,
+                min: 0.1,
+                max: 50,
+                class: "input",
+                oninput: "updateValue(this.value, 'tribe')"
             },
             saturation: {
                 type: "range",
@@ -192,11 +201,20 @@ let controls = {
             bright: {
                 type: "range",
                 step: 1,
-                value: 170,
+                value: 144,
                 min: 1,
                 max: 255,
                 class: "input",
                 oninput: "updateValue(this.value, 'bright')"
+            },
+            alpha: {
+                type: "range",
+                step: 1,
+                value: 170,
+                min: 1,
+                max: 255,
+                class: "input",
+                oninput: "updateValue(this.value, 'alpha')"
             }
         },
         arr : [],

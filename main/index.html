@@ -114,6 +114,7 @@
   function loadForm(display) {
     controls.drawable = controls[display]
     controls.drawable.setup()
+    redraw()
     if ("input" in controls.drawable)
       loadInput(controls.drawable.input, display)
   }
@@ -136,6 +137,7 @@
   function updateValue(val, to){
     $('#sp_'+to).html(val) 
     controls.drawable.input[to].value = parseFloat(val)
+    redraw()
   }
   function updateCbx(inp, to){
     $('#sp_'+to).html(controls.drawable.input[to].toggle[1]) 
@@ -143,6 +145,7 @@
     let t = controls.drawable.input[to].toggle[1]
     controls.drawable.input[to].toggle[1] = controls.drawable.input[to].toggle[0]
     controls.drawable.input[to].toggle[0] = t 
+    redraw()
   }
 
   function bgcg(val){
@@ -152,7 +155,7 @@
   $("#div_inputForm").ready(function () {
     setTimeout(function () {
       //stopPlay()
-      loadForm("man")
+      loadForm("wave")
     }, 150)
 
     pplDrawList()

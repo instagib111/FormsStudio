@@ -44,7 +44,7 @@ let Wave = function () {
 
     this.direction = 1
     this.speed = 1
-    let max = innerWidth * 2
+    let max = dist(0, 0, innerWidth, innerHeight) 
     for (let i = 0; i < max; i++) {
         let color = map(i, 0, max, 0, 255)
         arrEli.push({
@@ -58,20 +58,29 @@ let Wave = function () {
     let ctrl = controls.drawable.input
     this.update = function () {
         this.speed += ctrl.speed.value
-        for (let i = 0; i < max; i++) {
+
+        for (let i = 1; i < max; i++) {
             arrEli[i].c = Math.abs( Math.cos(this.speed + (i * PI/(ctrl.space.value + i / ctrl.space.value ))) * (ctrl.rad.value) )
+            arrEli[i].x = arrEli[i - 1].x + Math.cos(map(this.speed, 0, 10, 0, 1) + i * (PI / ctrl.tribe.value)) * ctrl.tribe.value
+            arrEli[i].y = arrEli[i - 1].y + Math.sin(map(this.speed, 0, 10, 0, 1) + i * (PI / ctrl.tribe.value)) * ctrl.tribe.value
         }
         
         this.draw()
     }
     this.draw = function () {
+        
         strokeWeight(1)
         noFill()
         for (let i = 0; i < max; i++) {
-            stroke(arrEli[i].c, ctrl.saturation.value, ctrl.bright.value)
-            // ellipse(arrEli[i].x, arrEli[i].y, arrEli[i].r)
-            ellipse(innerWidth / 2, innerHeight / 2, arrEli[i].r)
+            stroke(arrEli[i].c, ctrl.saturation.value, ctrl.bright.value, ctrl.alpha.value)
+            ellipse(arrEli[i].x, arrEli[i].y, arrEli[i].r)
+            // ellipse(innerWidth / 2, innerHeight / 2, arrEli[i].r)
+            // ellipse(
+            //     random(innerWidth / 2 - 1, innerWidth / 2 + 1), 
+            //     random(innerHeight / 2 - 1, innerHeight / 2 + 1), 
+            //     arrEli[i].r)
         }
+
     }
 }
 
@@ -145,6 +154,7 @@ let MultiDot = function (x, y, rad) {
 
 let DotFadeOut = function (v, a) {
     this.a = a
+    this.v = v
     this.rm = false
     //let ran = random(-1, 1)
     this.update = function () {
