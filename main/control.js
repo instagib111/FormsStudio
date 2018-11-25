@@ -9,6 +9,71 @@ let controls = {
         bgcg : 200
     },
     drawable: {},
+    lineWave: {
+        input: {
+            colorMode : {
+                type: "checkbox",
+                id: "inp_colorMode",
+                toggle: ["RGB", "HSB"],
+                value: "RGB",
+                class: "input",
+                oninput: "updateCbx(this.toggle, 'colorMode')"
+            },
+            speed: {
+                type: "range",
+                step: 0.001,
+                value: 0.067,
+                min: 0.001,
+                max: 10,
+                class: "input",
+                oninput: "updateValue(this.value, 'speed')"
+            },
+            space: {
+                type: "range",
+                step: 0.1,
+                value: 6.3,
+                min: 0,
+                max: 100,
+                class: "input",
+                oninput: "updateValue(this.value, 'space')"
+            },
+            rad: {
+                type: "range",
+                step: 10,
+                value: 254,
+                min: 4,
+                max: 300,
+                class: "input",
+                oninput: "updateValue(this.value, 'rad')"
+            }
+        },
+        arr: [],
+        draw: function () {
+            if(controls.drawable.input.colorMode.toggle[0] == "RGB")
+                colorMode(RGB, 255)
+            else if (controls.drawable.input.colorMode.toggle[0] == "HSB")
+                colorMode(HSB, 255)
+                
+            for (let i = 0; i < this.arr.length; i++) {
+                this.arr[i].update()
+                // if (this.arr[i].add)
+                //     this.arr.push(new Man(2, innerHeight / 2, 10, 20))
+
+                // if (this.arr[i].rm) // || this.arr.length > controls.global.max_inst)
+                //     this.arr.splice(i, 1)
+            }
+        },
+        setup: function () {
+            this.arr = [];
+            //trouver une autre solution pour les cbx
+            if(controls.drawable.input.colorMode.toggle[0] == "RBG")
+                colorMode(RGB, 255)
+            else 
+                colorMode(HSB, 255)
+
+            this.arr.push(new LineWave())
+        }
+    },
     man: {
         input: {
             speed: {
