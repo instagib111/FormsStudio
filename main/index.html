@@ -17,6 +17,7 @@
   <script src="object.js"></script>
   <script src="obj.js"></script>
   <script src="man.js"></script>
+  <script src="equation.js"></script>
   <script src="sketch.js"></script>
 </head>
 
@@ -117,18 +118,35 @@
     redraw()
     if ("input" in controls.drawable)
       loadInput(controls.drawable.input, display)
+    if ("select" in controls.drawable)
+      loadSelect(controls.drawable.select, display)
   }
 
-  function loadInput(input, title) {
+  function loadSelect(selects, title){
+    let elm = $("#div_inputForm")
+    let div = elm.append("<div></div>")
+    for (let it in selects) {
+      elm.append("<hr class='separ' />")
+      elm.append("<label for='slc_" + it + "'>" + it + " : </label>")
+      elm.append(" <span id='sp_"+ it +"'></span>")
+      let sel = $('<select>').appendTo(elm);
+      let selelm = selects[it]
+      $(selelm.option).each(function() {
+        sel.append($("<option>").attr('value',this.val).text(this.text));
+      });
+    }
+  }
+
+  function loadInput(inputs, title) {
     let elm = $("#div_inputForm")
     let div = elm.append("<div></div>")
     elm.empty()
     elm.append("<h2>" + title + "</h2>")
-    for (var it in input) {
+    for (let it in inputs) {
       elm.append("<hr class='separ' />")
       elm.append("<label for='inp_" + it + "'>" + it + "</label>")
-      elm.append(" <span id='sp_"+ it +"'>" + input[it].value + "</span>")
-      $("<input>").attr(input[it]).appendTo(elm)
+      elm.append(" <span id='sp_"+ it +"'>" + inputs[it].value + "</span>")
+      $("<input>").attr(inputs[it]).appendTo(elm)
     }
   }
 
@@ -155,7 +173,7 @@
   $("#div_inputForm").ready(function () {
     setTimeout(function () {
       //stopPlay()
-      loadForm("lineWave")
+      loadForm("equation")
     }, 150)
 
     pplDrawList()

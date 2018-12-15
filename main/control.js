@@ -9,6 +9,85 @@ let controls = {
         bgcg : 200
     },
     drawable: {},
+    equation:{
+        select: {
+            équations : {
+                id: "slc_equ",
+                option: [
+                    {value : "eq1", text : "Equation 1"},
+                    {value : "eq2", text : "Equation 2"},
+                    {value : "eq3", text : "Equation 3"}
+                ],
+                class: "input"
+            }
+            
+        },
+        input: {
+            colorMode : {
+                type: "checkbox",
+                id: "inp_colorMode",
+                toggle: ["RGB", "HSB"],
+                value: "RGB",
+                class: "input",
+                oninput: "updateCbx(this.toggle, 'colorMode')"
+            },
+            speed: {
+                type: "range",
+                step: 0.001,
+                value: 0.067,
+                min: 0.001,
+                max: 10,
+                class: "input",
+                oninput: "updateValue(this.value, 'speed')"
+            },
+            space: {
+                type: "range",
+                step: 0.1,
+                value: 6.3,
+                min: 0,
+                max: 100,
+                class: "input",
+                oninput: "updateValue(this.value, 'space')"
+            },
+            rad: {
+                type: "range",
+                step: 10,
+                value: 254,
+                min: 4,
+                max: 300,
+                class: "input",
+                oninput: "updateValue(this.value, 'rad')"
+            }
+        },
+        arr: [],
+        draw: function () {
+            // if(controls.drawable.input.colorMode.toggle[0] == "RGB")
+            //     colorMode(RGB, 255)
+            // else if (controls.drawable.input.colorMode.toggle[0] == "HSB")
+            //     colorMode(HSB, 255)
+                
+            for (let i = 0; i < this.arr.length; i++) {
+                this.arr[i].update()
+                // if (this.arr[i].add)
+                //     this.arr.push(new Man(2, innerHeight / 2, 10, 20))
+
+                // if (this.arr[i].rm) // || this.arr.length > controls.global.max_inst)
+                //     this.arr.splice(i, 1)
+            }
+        },
+        setup: function () {
+            this.arr = [];
+            //trouver une autre solution pour les cbx
+            // if(controls.drawable.input.colorMode.toggle[0] == "RBG")
+            //     colorMode(RGB, 255)
+            // else 
+            //     colorMode(HSB, 255)
+            strokeWeight(3)
+            noFill()
+            angleMode(DEGREES)
+            this.arr.push(new Equation())
+        }
+    },
     lineWave: {
         input: {
             colorMode : {
@@ -298,7 +377,7 @@ let controls = {
                     this.arr.splice(i, 1)
             }
 
-            text("nombre d'instances : " + this.arr.length, innerWidth - 400, 30)
+            //text("nombre d'instances : " + this.arr.length, innerWidth - 400, 30)
         },
         setup: function () {
             this.arr = []
