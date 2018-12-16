@@ -10,24 +10,27 @@ let controls = {
     },
     drawable: {},
     equation:{
-        select: {
-            équations : {
-                id: "slc_equ",
-                option: [
-                    {value : "eq1", text : "Equation 1"},
-                    {value : "eq2", text : "Equation 2"},
-                    {value : "eq3", text : "Equation 3"}
-                ],
-                class: "input"
-            }
+        // select: {
+        //     équations : {
+        //         disabled : "disabled",
+        //         id: "slc_equ",
+        //         option: [
+        //             {value : "eq1", text : "Equation 1"},
+        //             {value : "eq2", text : "Equation 2"},
+        //             {value : "eq3", text : "Equation 3"}
+        //         ],
+        //         class: "input",
+        //         value: "eq1",
+        //         onchange: "updateSlc(this.value, 'équations')"
+        //     }
             
-        },
+        // },
         input: {
             colorMode : {
                 type: "checkbox",
                 id: "inp_colorMode",
-                toggle: ["RGB", "HSB"],
-                value: "RGB",
+                toggle: ["HSB", "RGB"],
+                value: "HSB",
                 class: "input",
                 oninput: "updateCbx(this.toggle, 'colorMode')"
             },
@@ -35,36 +38,18 @@ let controls = {
                 type: "range",
                 step: 0.001,
                 value: 0.067,
-                min: 0.001,
-                max: 10,
+                min: -1,
+                max: 1,
                 class: "input",
                 oninput: "updateValue(this.value, 'speed')"
-            },
-            space: {
-                type: "range",
-                step: 0.1,
-                value: 6.3,
-                min: 0,
-                max: 100,
-                class: "input",
-                oninput: "updateValue(this.value, 'space')"
-            },
-            rad: {
-                type: "range",
-                step: 10,
-                value: 254,
-                min: 4,
-                max: 300,
-                class: "input",
-                oninput: "updateValue(this.value, 'rad')"
             }
         },
         arr: [],
         draw: function () {
-            // if(controls.drawable.input.colorMode.toggle[0] == "RGB")
-            //     colorMode(RGB, 255)
-            // else if (controls.drawable.input.colorMode.toggle[0] == "HSB")
-            //     colorMode(HSB, 255)
+            if(controls.drawable.input.colorMode.toggle[0] == "RGB")
+                colorMode(RGB, 255)
+            else if (controls.drawable.input.colorMode.toggle[0] == "HSB")
+                colorMode(HSB, 255)
                 
             for (let i = 0; i < this.arr.length; i++) {
                 this.arr[i].update()
@@ -78,10 +63,10 @@ let controls = {
         setup: function () {
             this.arr = [];
             //trouver une autre solution pour les cbx
-            // if(controls.drawable.input.colorMode.toggle[0] == "RBG")
-            //     colorMode(RGB, 255)
-            // else 
-            //     colorMode(HSB, 255)
+            if(controls.drawable.input.colorMode.toggle[0] == "RBG")
+                colorMode(RGB, 255)
+            else 
+                colorMode(HSB, 255)
             strokeWeight(3)
             noFill()
             angleMode(DEGREES)

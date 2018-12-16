@@ -132,8 +132,10 @@
       let sel = $('<select>').appendTo(elm);
       let selelm = selects[it]
       $(selelm.option).each(function() {
-        sel.append($("<option>").attr('value',this.val).text(this.text));
+        sel.append($("<option>").attr('value',this.value).text(this.text));
       });
+      delete selelm.option
+      sel.attr(selelm)
     }
   }
 
@@ -155,7 +157,8 @@
   function updateValue(val, to){
     $('#sp_'+to).html(val) 
     controls.drawable.input[to].value = parseFloat(val)
-    redraw()
+    if(stoped)
+      redraw()
   }
   function updateCbx(inp, to){
     $('#sp_'+to).html(controls.drawable.input[to].toggle[1]) 
@@ -164,6 +167,13 @@
     controls.drawable.input[to].toggle[1] = controls.drawable.input[to].toggle[0]
     controls.drawable.input[to].toggle[0] = t 
     redraw()
+  }
+
+  function updateSlc(val, to) {
+    controls.drawable.select[to].value = val
+    if(stoped)
+      redraw()
+    console.log(val)
   }
 
   function bgcg(val){
