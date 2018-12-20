@@ -130,11 +130,12 @@
       elm.append("<label for='slc_" + it + "'>" + it + " : </label>")
       elm.append(" <span id='sp_"+ it +"'></span>")
       let sel = $('<select>').appendTo(elm);
-      let selelm = selects[it]
+      let selelm = JSON.parse(JSON.stringify(selects[it]))
       $(selelm.option).each(function() {
         sel.append($("<option>").attr('value',this.value).text(this.text));
       });
       delete selelm.option
+      delete selelm.wait
       sel.attr(selelm)
     }
   }
@@ -171,9 +172,9 @@
 
   function updateSlc(val, to) {
     controls.drawable.select[to].value = val
+    controls.drawable.select[to].wait(val)
     if(stoped)
       redraw()
-    console.log(val)
   }
 
   function bgcg(val){

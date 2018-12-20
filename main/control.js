@@ -10,21 +10,24 @@ let controls = {
     },
     drawable: {},
     equation:{
-        // select: {
-        //     équations : {
-        //         disabled : "disabled",
-        //         id: "slc_equ",
-        //         option: [
-        //             {value : "eq1", text : "Equation 1"},
-        //             {value : "eq2", text : "Equation 2"},
-        //             {value : "eq3", text : "Equation 3"}
-        //         ],
-        //         class: "input",
-        //         value: "eq1",
-        //         onchange: "updateSlc(this.value, 'équations')"
-        //     }
+        select: {
+            équations : {
+                //disabled : "disabled",
+                id: "slc_equ",
+                option: [
+                    {value : "eq3", text : "cos(x²m)/(x/100)+0.4"}
+                    ,{value : "sinuscar", text : "sin(xs)/x*100"}
+                    //,{value : "eq3", text : "Equation 3"}
+                ],
+                class: "input",
+                value: "eq3",
+                wait: function (val){
+                    controls.drawable.arr[0].switchEq(val)
+                },
+                onchange: "updateSlc(this.value, 'équations')"
+            }
             
-        // },
+        },
         input: {
             colorMode : {
                 type: "checkbox",

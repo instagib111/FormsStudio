@@ -4,22 +4,27 @@ class Equation {
         this.tm = 1;
         this.max = 1100;
         this.f = 1;
-        this.mt = this.sinuscar(this.max, this.tm);
+        this.curEq = this[controls.drawable.select.équations.value]
+        this.mt = this.curEq(this.max, this.tm);
     }
 
+    // équations
     eq3(x, m){
         return Math.cos(x*x*m)/(x/100)+0.40;
     }
     sinuscar(x, s){
         return Math.sin(x*s)/x * 100
     }
-
+    
+    switchEq(val){
+        this.curEq = this[val]
+    }
     cir(x,y,d){
-        let a = map(this.sinuscar(d, this.tm),this.f, this.mt, 255, 0);
+        let a = map(this.curEq(d, this.tm),this.f, this.mt, 255, 0);
         stroke(a, 155, 200, a*2);
         noFill();
         strokeWeight(4);
-        smooth()
+        //smooth()
         //console.log(a)
         ellipse(x,y,d);
         if(d < this.max)
