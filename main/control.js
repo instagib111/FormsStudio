@@ -15,12 +15,13 @@ let controls = {
                 //disabled : "disabled",
                 id: "slc_equ",
                 option: [
-                    {value : "eq3", text : "cos(x²m)/(x/100)+0.4"}
+                    {value : "ondeGravite", text : "onde de gravité"}
+                    ,{value : "eq3", text : "cos(x²m)/(x/100)+0.4"}
                     ,{value : "sinuscar", text : "sin(xs)/x*100"}
                     //,{value : "eq3", text : "Equation 3"}
                 ],
                 class: "input",
-                value: "eq3",
+                value: "ondeGravite",
                 wait: function (val){
                     controls.drawable.arr[0].switchEq(val)
                 },

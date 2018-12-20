@@ -10,14 +10,21 @@ class Equation {
 
     // équations
     eq3(x, m){
-        return Math.cos(x*x*m)/(x/100)+0.40;
+        return Math.cos(x*x*(m/100000))/(x/100)+0.40;
     }
     sinuscar(x, s){
-        return Math.sin(x*s)/x * 100
+        return Math.sin(x*(s/1000))/x * 100
     }
     
+    ondeGravite(x,m){
+        var c = Math.sqrt(((10*x)/(2*Math.PI)) * Math.tanh((2*Math.PI*50) / x ))
+        return c
+    }
+
     switchEq(val){
+        this.tm = 1;
         this.curEq = this[val]
+        this.mt = this.curEq(this.max, this.tm);
     }
     cir(x,y,d){
         let a = map(this.curEq(d, this.tm),this.f, this.mt, 255, 0);
@@ -33,11 +40,11 @@ class Equation {
 
     update() {
         if(this.tm<100000)
-            this.tm += controls.drawable.input.speed.value/1000;
+            this.tm += controls.drawable.input.speed.value;
         this.draw()
     }
 
     draw(){
-        this.cir(width / 2, height / 2, this.tm)
+        this.cir(width / 2, height / 2, this.f)
     }
 }
